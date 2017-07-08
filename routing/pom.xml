@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.iqmsoft.fuse.osgi</groupId>
+        <artifactId>esb-transactions</artifactId>
+        <version>6.3.0</version>
+    </parent>
+
+    <groupId>com.iqmsoft.fuse.osgi.transactions</groupId>
+    <artifactId>routing</artifactId>
+    <packaging>bundle</packaging>
+
+    <name>Transactions :: Routing</name>
+
+    <properties>
+        <database />
+        <osgi-import-pkg>*</osgi-import-pkg>
+        <osgi-private-pkg>
+            com.iqmsoft.fuse.osgi.transactions.routes
+        </osgi-private-pkg>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.iqmsoft.fuse.osgi.transactions</groupId>
+            <artifactId>database</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-camel</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <!-- maven-bundle-plugin with _removeheaders MANIFEST header is added to make this example run in fabric environment as well. -->
+    <build>
+        <plugins>
+            <!-- Felix -->
+            <!-- Additional configuration for Felix maven-bundle-plugin.  -->
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Import-Package>${osgi-import-pkg}</Import-Package>
+                        <_removeheaders>Import-Service</_removeheaders>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
